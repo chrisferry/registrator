@@ -65,7 +65,12 @@ func servicePort(container *dockerapi.Container, port dockerapi.Port, published 
 		hip = "0.0.0.0"
 	}
 	exposedPort := strings.Split(string(port), "/")
-	ep = exposedPort[0]
+
+	if len(exposedPort) == 0 {
+		ep = ""
+	} else {
+		ep = exposedPort[0]
+	}
 	if len(exposedPort) == 2 {
 		ept = exposedPort[1]
 	} else {
